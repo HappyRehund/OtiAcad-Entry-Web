@@ -6,9 +6,20 @@ import AddTodo from "./AddTodo";
 import Filter from "./Filter";
 import TodoList from "./TodoList";
 import ClearButton from "./ClearButton";
+import { useEffect } from "react";
 
 function Todo() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      return JSON.parse(savedTodos).map((todo) => ({
+        ...todo,
+        createdAt: new Date(todo.createdAt),
+      }));
+    } else {
+      return [];
+    }
+  });
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
 
@@ -60,6 +71,11 @@ function Todo() {
       addTodo();
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <>
       {/* Stats */}
@@ -87,11 +103,7 @@ function Todo() {
         deleteTodo={deleteTodo}
       />
       {/* Clear Completed Button */}
-      <ClearButton 
-        stats={stats}
-        todos={todos}
-        setTodos={setTodos}
-      />
+      <ClearButton stats={stats} todos={todos} setTodos={setTodos} />
     </>
   );
 }
