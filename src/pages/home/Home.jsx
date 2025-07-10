@@ -1,6 +1,6 @@
-import Hero from "../module/home/Hero";
-import Features from "../module/home/Features";
-import CTASection from "../module/home/CTASection";
+import Hero from "../../module/home/Hero";
+import Features from "../../module/home/Features";
+import CTASection from "../../module/home/CTASection";
 
 const HomePage = () => {
   return (
@@ -11,7 +11,6 @@ const HomePage = () => {
       <Features />
       {/* CTA Section */}
       <CTASection />
-      
     </>
   );
 };

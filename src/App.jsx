@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './components/Layout'
-import Home from './pages/Home'
-import TodoListPage from './pages/TodoList'
-import ExpenseTrackerPage from './pages/ExpenseTracker'
-import HealthTrackerPage from './pages/HealthTracker'
-import SettingsPage from './pages/Settings'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/home/Home";
+import TodoListPage from "./pages/todo-list/TodoList";
+import ExpenseTrackerPage from "./pages/expense-tracker/ExpenseTracker";
+import HealthTrackerPage from "./pages/health-tracker/HealthTracker";
+import SettingsPage from "./pages/settings/Settings";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -18,8 +18,8 @@ function App() {
           <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
-    </Router>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

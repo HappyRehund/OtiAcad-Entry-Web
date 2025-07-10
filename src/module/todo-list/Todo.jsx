@@ -1,52 +1,16 @@
 import { useMemo } from "react";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Stats from "./Stats";
 import AddTodo from "./AddTodo";
 import Filter from "./Filter";
 import TodoList from "./TodoList";
 import ClearButton from "./ClearButton";
-import { useEffect } from "react";
+import { useTodos } from "../../hooks/useTodos";
 
 function Todo() {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos");
-    if (savedTodos) {
-      return JSON.parse(savedTodos).map((todo) => ({
-        ...todo,
-        createdAt: new Date(todo.createdAt),
-      }));
-    } else {
-      return [];
-    }
-  });
+  const { todos, setTodos, addTodo, toggleTodo, deleteTodo } = useTodos();
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
-
-  const addTodo = () => {
-    if (newTodo.trim()) {
-      const todo = {
-        id: uuidv4(),
-        text: newTodo.trim(),
-        completed: false,
-        createdAt: new Date(),
-      };
-      setTodos([todo, ...todos]);
-      setNewTodo("");
-    }
-  };
-
-  const toggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
 
   const filteredTodos = useMemo(() => {
     switch (filter) {
@@ -66,16 +30,15 @@ function Todo() {
     return { total, completed, active };
   }, [todos]);
 
+  const handleAddTodo = () => {
+    addTodo(newTodo);
+    setNewTodo("");
+  };
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       addTodo();
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
   return (
     <>
       {/* Stats */}
@@ -88,7 +51,7 @@ function Todo() {
       <AddTodo
         newTodo={newTodo}
         setNewTodo={setNewTodo}
-        addTodo={addTodo}
+        addTodo={handleAddTodo}
         handleKeyPress={handleKeyPress}
       />
       {/* Filter */}
