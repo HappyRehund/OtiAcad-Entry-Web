@@ -15,7 +15,6 @@ function Navbar() {
     { path: "/todolist", label: "Todo List", icon: CheckSquare },
     { path: "/expense-tracker", label: "Expense Tracker", icon: DollarSign },
     { path: "/health-tracker", label: "Health Tracker", icon: Heart },
-    { path: "/settings", label: "Settings", icon: Settings },
   ];
 
   return (

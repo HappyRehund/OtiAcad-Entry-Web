@@ -2,9 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/home/Home";
 import TodoListPage from "./pages/todo-list/TodoList";
-import ExpenseTrackerPage from "./pages/expense-tracker/ExpenseTracker";
-import HealthTrackerPage from "./pages/health-tracker/HealthTracker";
-import SettingsPage from "./pages/settings/Settings";
+import ExpenseTrackerPage from "./pages/expense-tracker/ExpenseTrackerPage";
+import HealthTrackerPage from "./pages/health-tracker/HealthTrackerPage";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
           <Route path="todolist" element={<TodoListPage />} />
           <Route path="expense-tracker" element={<ExpenseTrackerPage />} />
           <Route path="health-tracker" element={<HealthTrackerPage />} />
-          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

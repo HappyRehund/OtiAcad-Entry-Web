@@ -1,9 +1,8 @@
-import React from 'react'
-
+import HealthTracker from '../../module/health-tracker/HealthTracker'
 function HealthTrackerPage() {
   return (
     <>
-        HEALTH ITU PENTING!!!
+        <HealthTracker />
     </>
   )
 }
